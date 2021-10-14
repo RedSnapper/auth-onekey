@@ -1,5 +1,5 @@
 {
-	"name": "redsnapper/auth-onekey",
+	"name": "rs/auth-onekey",
 	"description": "A phpCAS Laravel wrapper for OneKey, an authentication system for healthcare professionals from IQVIA.",
 	"type": "library",
 	"license": "MIT",
