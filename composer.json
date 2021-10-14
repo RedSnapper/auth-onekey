@@ -1,0 +1,45 @@
+{
+	"name": "redsnapper/auth-onekey",
+	"description": "A phpCAS Laravel wrapper for OneKey, an authentication system for healthcare professionals from IQVIA.",
+	"type": "library",
+	"license": "MIT",
+	"author": [
+		{
+			"name": "Anton Sirik",
+			"email": "anton.sirik@redsnapper.net"
+		}
+	],
+	"autoload": {
+	    "psr-4": {
+	      	"RedSnapper\\OneKey\\": "src"
+	    }
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"RedSnapper\\OneKey\\Tests\\": "tests"
+		}
+	},
+	"require": {
+		"php": "^7.4|^8.0",
+		"ext-json": "*",
+		"apereo/phpcas": "^1.4"
+	},
+	"require-dev": {
+		"orchestra/testbench": "^6.0",
+		"phpunit/phpunit": "^9.5",
+		"psalm/plugin-laravel": "^1.5",
+		"vimeo/psalm": "^4.9",
+		"guzzlehttp/guzzle": "^7.3"
+	},
+    "scripts": {
+        "psalm": "vendor/bin/psalm",
+        "test": "vendor/bin/phpunit"
+    },
+	"extra": {
+		"laravel": {
+			"providers": [
+				"RedSnapper\\OneKey\\OneKeyServiceProvider"
+			]
+		}
+	}
+}
