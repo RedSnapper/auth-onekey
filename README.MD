@@ -96,12 +96,12 @@ composer test
 
 ## Changelog
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+Please see [CHANGELOG](CHANGELOG.MD) for more information on what has changed recently.
 
 ## Contributing
 
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](.github/CONTRIBUTING.MD) for details.
 
 ## License
 
-The MIT License (MIT). Please see [Licence File](LICENCE.md) for more information.
+The MIT License (MIT). Please see [Licence File](LICENCE.MD) for more information.
