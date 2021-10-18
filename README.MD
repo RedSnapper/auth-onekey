@@ -14,7 +14,7 @@ This repo can be used to provide SSO authentication with [OneKey] (https://www.i
 You can install the package via composer:
 
 ```bash
-composer require redsnapper/auth-onekey
+composer require rs/auth-onekey
 ```
 
 
@@ -104,4 +104,4 @@ Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT). Please see [Licence File](LICENCE.md) for more information.
