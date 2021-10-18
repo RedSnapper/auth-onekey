@@ -8,7 +8,8 @@ return [
      |--------------------------------------------------------------------------
      |
      | Change the value below via your .env file to override the default
-     | service url for the CAS client.
+     | values for the CAS client.
+     |
      */
     'debug' => env('ONE_KEY_DEBUG',false),
 
