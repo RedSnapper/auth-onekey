@@ -2,9 +2,9 @@
 ### A phpCAS Laravel wrapper for OneKey, an authentication system for healthcare professionals from IQVIA
 
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/vendor_slug/package_slug.svg?style=flat-square)](https://packagist.org/packages/vendor_slug/package_slug)
-[![GitHub Tests Action Status](https://github.com/redsnapper/socialite-swiss-rx/workflows/run-tests/badge.svg)](https://github.com/redsnapper/socialite-swiss-rx/actions)
-[![Total Downloads](https://img.shields.io/packagist/dt/vendor_slug/package_slug.svg?style=flat-square)](https://packagist.org/packages/vendor_slug/package_slug)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/rs/auth-onekey.svg?style=flat-square)](https://packagist.org/packages/rs/auth-onekey)
+[![GitHub Tests Action Status](https://github.com/redsnapper/auth-onekey/workflows/run-tests/badge.svg)](https://github.com/redsnapper/auth-onekey/actions)
+[![Total Downloads](https://img.shields.io/packagist/dt/rs/auth-onekey.svg?style=flat-square)](https://packagist.org/packages/rs/auth-onekey)
 
 ---
 This repo can be used to provide SSO authentication with [OneKey] (https://www.iqvia.com/locations/united-states/solutions/life-sciences/information-solutions/essential-information/onekey-reference-assets/onekey-web).
@@ -18,7 +18,7 @@ composer require redsnapper/auth-onekey
 ```
 
 
-If you would like to override the default fixed service and callback urls, publish the config file:
+If you would like to override the default debug mode and callback urls, publish the config file:
 ```bash
 php artisan vendor:publish --tag=onekey-config
 ```
@@ -26,8 +26,8 @@ php artisan vendor:publish --tag=onekey-config
 Once the `onekey.php` has been published, update your `.env` file:
 ```php
 
-ONE_KEY_SERVICE_URL=<your-service-url>
-ONE_KEY_CALLBACK_URL=<your-callback-url>
+ONE_KEY_DEBUG=<boolean>
+ONE_KEY_CALLBACK_URL=<string:your-callback-url>
 ```
 
 ## Usage
@@ -36,73 +36,62 @@ Register your routes
 ```php
 //web.php
 
-Route::get('onekey/callback', [OneKeyLoginController::class, 'callback'])->name('one-key.callback');
+Route::get('onekey/redirect', [OneKeyLoginController::class, 'redirectToProvider']);
+Route::get('onekey/callback', [OneKeyLoginController::class, 'handleProviderCallback']);
 ```
 
-Then in your controller call the `callback()` method:
+Then in your controller call the `redirectToProvider()` method:
 
 ```php
 //Http\Controllers\OneKeyLoginController.php
 
-use RedSnapper\OneKey\OneKeyUser;
-use RedSnapper\OneKey\PhpCASBridge;
-use Illuminate\Http\RedirectResponse;
+use RedSnapper\OneKey\OneKeyProvider;
 
-
-public function callback(): RedirectResponse
-    {
-        // Instantiate the wrapper class
-        $provider = new PhpCASBridge;
-        //Initialise the client
-        $provider->getClient();
-        $provider->setNoCasServerValidation()
-            ->handleLogoutRequests()
-            //Make the authentication call. Redirects to SSO if not authenticated.
-            ->forceAuthentication();
-
-        $this->handleProviderCallback($provider->getOneKeyUser());
-
-        return redirect()->intended();
-    }
-
-    public function handleProviderCallback(OneKeyUser $providerData)
-    {
-        // Map OneKey returned user with your User model
-        $hcp = new User([
-            'id' => $providerData->getId(),
-            'name' => $providerData->getFullName(),
-            'email' => $providerData->getEmail(),
-            'guard' => 'web'
-        ]);
-        //Authenticate your user using your own auth method, for example:
-        session()->put($hcp->guard, $hcp->toArray());
-        auth($hcp->guard)->login($hcp);
-    }
+public function redirectToProvider(OneKeyProvider $provider)
+{
+    return $provider->redirect();
+}
 
 ```
 
-If you want to set a custom fixed service url, you should call the `setFixedServiceUrl(string $url)` on the `PhpCASWrapper` class:
+Then, in the same controller, implement the `handleProviderCallback()` method. For example:
 
 ```php
 //Http\Controllers\OneKeyLoginController.php
 
-use RedSnapper\OneKey\PhpCASBridge;
+use RedSnapper\OneKey\OneKeyProvider;
 
-$provider = new PhpCASBridge;
-//Initialise the client
-$provider->getClient();
-$provider->setNoCasServerValidation()
-    ->handleLogoutRequests()
-    ->setFixedServiceUrl('example.com') // or setFixedServiceUrl() to default to
-                                        // the value from the config/onekey.php
-    //Make the authentication call. Redirects to SSO if not authenticated.
-    ->forceAuthentication();
+//..//
+
+public function handleProviderCallback(OneKeyProvider $provider)
+{   // Get OneKey user from the provider
+    $providerUser = $provider->user();
+    
+    //Map the one-key user with your User model, save in DB
+    // or perform any other action
+    $user = new User([
+        'id' => $providerUser->getId(),
+        'name' => $providerUser->getFullName(),
+        'email' => $providerUser->getEmail(),
+        'guard' => 'web'
+    ]);
+    
+    session()->put($user->guard, $user->toArray());
+    auth($user->guard)->login($user);
+
+    return redirect()->intended();
+}
 ```
+**Make sure your callback url is first registered with the OneKey service.**
 
 ## Testing
 
 ```bash
 vendor/bin/phpunit
+```
+or 
+```bash
+composer test
 ```
 
 ## Changelog

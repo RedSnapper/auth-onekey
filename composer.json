@@ -3,10 +3,16 @@
 	"description": "A phpCAS Laravel wrapper for OneKey, an authentication system for healthcare professionals from IQVIA.",
 	"type": "library",
 	"license": "MIT",
-	"author": [
+	"authors": [
 		{
 			"name": "Anton Sirik",
-			"email": "anton.sirik@redsnapper.net"
+			"email": "anton.sirik@redsnapper.net",
+			"role": "Developer"
+		},
+		{
+			"name": "Param Dhaliwal",
+			"email": "param.dhaliwal@redsnapper.net ",
+			"role": "Developer"
 		}
 	],
 	"autoload": {
