@@ -4,7 +4,8 @@ namespace RedSnapper\OneKey;
 
 use Illuminate\Support\Arr;
 
-class OneKeyUser {
+class OneKeyUser
+{
 
     private array $data;
 
@@ -13,7 +14,7 @@ class OneKeyUser {
         $this->data = $data;
     }
 
-    public function getId(): ?string
+    public function getId(): string
     {
         return Arr::get($this->data, 'UID');
     }
@@ -30,7 +31,7 @@ class OneKeyUser {
 
     public function getFullName(): ?string
     {
-        return $this->getFirstName() . ' ' . $this->getLastName();
+        return $this->getFirstName().' '.$this->getLastName();
     }
 
     public function getEmail(): ?string
@@ -53,12 +54,17 @@ class OneKeyUser {
         return Arr::get($this->data, 'profession');
     }
 
+    public function isHCP(): bool
+    {
+        return Arr::get($this->data, 'usertype') === "PS";
+    }
+
     /**
      * Get the raw user array.
      *
      * @return array
      */
-    public function getRaw():array
+    public function getRaw(): array
     {
         return $this->data;
     }

@@ -24,7 +24,8 @@ class OneKeyProviderTest extends TestCase
             'email'=> 'user@example.com',
             'city' => 'London',
             'profession' => 'Doctor',
-            'professionalPhone' => '12345-1234-1234'
+            'professionalPhone' => '12345-1234-1234',
+            'usertype'=> 'PS'
         ]);
 
         $provider = new OneKeyProvider($bridge);
@@ -38,6 +39,7 @@ class OneKeyProviderTest extends TestCase
         $this->assertEquals('John Doe', $user->getFullName());
         $this->assertEquals('London', $user->getCity());
         $this->assertEquals('Doctor', $user->getProfession());
+        $this->assertTrue($user->isHCP());
 
         $this->assertEquals($rawData, $user->getRaw());
     }
