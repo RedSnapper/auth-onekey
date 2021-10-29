@@ -48,6 +48,12 @@ class PhpCASBridge
         return phpCAS::getAttributes();
     }
 
+    public function setNoClearTicketsFromUrl():self
+    {
+        phpCAS::setNoClearTicketsFromUrl();
+        return $this;
+    }
+
     public function setNoCasServerValidation():self
     {
         phpCAS::setNoCasServerValidation();

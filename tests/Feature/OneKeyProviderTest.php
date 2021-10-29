@@ -15,8 +15,8 @@ class OneKeyProviderTest extends TestCase
     {
         $bridge = $this->mock(PhpCASBridge::class);
         $bridge->shouldReceive('setClient')->once();
-        $bridge->shouldReceive('setNoCasServerValidation')->once();
-        $bridge->shouldReceive('forceAuthentication')->once();
+        $bridge->shouldReceive('setNoCasServerValidation->setNoClearTicketsFromUrl->forceAuthentication')->once();
+
         $bridge->shouldReceive('getAttributes')->once()->andReturn($rawData = [
             'UID' => '1234567890',
             'firstname' => 'John',

@@ -28,7 +28,7 @@ class OneKeyServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton(OneKeyProvider::class, function ($app) {
-            return new OneKeyProvider(new PhpCASBridge, config('onekey'));
+            return new OneKeyProvider(new PhpCASBridge,config('onekey'));
         });
     }
 }
