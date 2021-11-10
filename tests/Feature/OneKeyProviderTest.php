@@ -24,8 +24,9 @@ class OneKeyProviderTest extends TestCase
             'email'=> 'user@example.com',
             'city' => 'London',
             'profession' => 'Doctor',
-            'professionalPhone' => '12345-1234-1234',
-            'usertype'=> 'PS'
+            'professionalPhone' => '1234512341234',
+            'usertype'=> 'PS',
+            'Cegedim_security_level' => '4'
         ]);
 
         $provider = new OneKeyProvider($bridge);
@@ -39,7 +40,9 @@ class OneKeyProviderTest extends TestCase
         $this->assertEquals('John Doe', $user->getFullName());
         $this->assertEquals('London', $user->getCity());
         $this->assertEquals('Doctor', $user->getProfession());
+        $this->assertEquals('1234512341234', $user->getPhone());
         $this->assertTrue($user->isHCP());
+        $this->assertEquals('4', $user->trustLevel());
 
         $this->assertEquals($rawData, $user->getRaw());
     }

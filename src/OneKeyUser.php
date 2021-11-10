@@ -59,6 +59,11 @@ class OneKeyUser
         return Arr::get($this->data, 'usertype') === "PS";
     }
 
+    public function trustLevel(): int
+    {
+        return Arr::get($this->data, 'Cegedim_security_level');
+    }
+
     /**
      * Get the raw user array.
      *

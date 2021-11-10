@@ -84,6 +84,25 @@ public function handleProviderCallback(OneKeyProvider $provider)
 ```
 **Make sure your callback url is first registered with the OneKey service.**
 
+###All available methods for getting user data:
+
+```php
+$user = $provider->user();
+
+$user->getId(); //?string 
+$user->getEmail(); //?string 
+$user->getFirstName(); //?string 
+$user->getLastName(); //?string 
+$user->getFullName(); //?string 
+$user->getCity(); //?string 
+$user->getProfession(); //?string 
+$user->getPhone(); //?string
+$user->isHCP(); //bool
+$user->trustLevel(); //int
+
+$user->getRaw(); //array
+```
+
 ## Testing
 
 ```bash
