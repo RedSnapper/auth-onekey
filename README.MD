@@ -18,43 +18,27 @@ composer require rs/auth-onekey
 ```
 
 
-If you would like to override the default debug mode and callback urls, publish the config file:
+But default, the package is set to the `debug = false` mode. If you would like to override it, publish the config file:
 ```bash
 php artisan vendor:publish --tag=onekey-config
 ```
 
-Once the `onekey.php` has been published, update your `.env` file:
+Once the `onekey.php` config file has been published, update your `.env` file:
 ```php
 
 ONE_KEY_DEBUG=<boolean>
-ONE_KEY_CALLBACK_URL=<string:your-callback-url>
 ```
 
 ## Usage
 
-Register your routes
+Register your route
 ```php
 //web.php
 
-Route::get('onekey/redirect', [OneKeyLoginController::class, 'redirectToProvider']);
 Route::get('onekey/callback', [OneKeyLoginController::class, 'handleProviderCallback']);
 ```
 
-Then in your controller call the `redirectToProvider()` method:
-
-```php
-//Http\Controllers\OneKeyLoginController.php
-
-use RedSnapper\OneKey\OneKeyProvider;
-
-public function redirectToProvider(OneKeyProvider $provider)
-{
-    return $provider->redirect();
-}
-
-```
-
-Then, in the same controller, implement the `handleProviderCallback()` method. For example:
+Then, implement the `handleProviderCallback()` method in your controller. For example:
 
 ```php
 //Http\Controllers\OneKeyLoginController.php
@@ -82,8 +66,6 @@ public function handleProviderCallback(OneKeyProvider $provider)
     return redirect()->intended();
 }
 ```
-**Make sure your callback url is first registered with the OneKey service.**
-
 ###All available methods for getting user data:
 
 ```php

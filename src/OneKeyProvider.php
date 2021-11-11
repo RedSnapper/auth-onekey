@@ -41,11 +41,6 @@ class OneKeyProvider
         }
     }
 
-    public function redirect()
-    {
-        return redirect()->to($this->config['callback_url']);
-    }
-
     public function user(): OneKeyUser
     {
 

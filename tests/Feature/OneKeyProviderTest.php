@@ -46,20 +46,4 @@ class OneKeyProviderTest extends TestCase
 
         $this->assertEquals($rawData, $user->getRaw());
     }
-
-    /** @test */
-    public function it_can_redirect_to_one_key_callback()
-    {
-        $bridge = $this->mock(PhpCASBridge::class);
-        $bridge->shouldReceive('setClient')->once();
-
-        $config = [
-            'debug' => false,
-            'callback_url' => 'https://example.com/callback_url'
-        ];
-
-        $provider = new OneKeyProvider($bridge, $config);
-
-        $this->assertEquals(Arr::get($config, 'callback_url'), $provider->redirect()->getTargetUrl());
-    }
 }

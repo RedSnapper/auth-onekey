@@ -13,5 +13,4 @@ return [
      */
     'debug' => env('ONE_KEY_DEBUG',false),
 
-    'callback_url' => env('ONE_KEY_CALLBACK_URL', env('APP_URL') . '/onekey/callback'),
 ];
