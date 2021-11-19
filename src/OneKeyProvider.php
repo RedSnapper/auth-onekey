@@ -67,6 +67,6 @@ class OneKeyProvider
 
     private function getHostName(): string
     {
-        return config('live') ? 'www.owa-secure.com' : 'www.rowa-secure.com';
+        return config('onekey.live') ? 'www.owa-secure.com' : 'www.rowa-secure.com';
     }
 }

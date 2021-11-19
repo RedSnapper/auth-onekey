@@ -18,15 +18,17 @@ composer require rs/auth-onekey
 ```
 
 
-But default, the package is set to the `debug = false` mode. If you would like to override it, publish the config file:
+But default, the package is set to the `debug = false` and `live = true` mode. The latter determines the provider url that the client is redirected to (`live = true` - 'www.owa-secure.com', `live = false` - 'www.rowa-secure.com') If you would like to override it, publish the config file:
 ```bash
 php artisan vendor:publish --tag=onekey-config
 ```
 
 Once the `onekey.php` config file has been published, update your `.env` file:
 ```php
+//.env
 
 ONE_KEY_DEBUG=<boolean>
+ONE_KEY_LIVE=<boolean>
 ```
 
 ## Usage
