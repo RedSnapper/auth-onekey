@@ -46,4 +46,26 @@ class OneKeyProviderTest extends TestCase
 
         $this->assertEquals($rawData, $user->getRaw());
     }
+
+    /** @test */
+    public function url_used_for_cas_client_changes_depending_on_whether_we_are_using_a_test_environment()
+    {
+
+        $bridge = $this->mock(PhpCASBridge::class);
+        $bridge->shouldReceive('setClient')->once()->withSomeOfArgs("www.rowa-secure.com");
+
+        $provider = new OneKeyProvider($bridge,['live'=>false]);
+
+    }
+
+    /** @test */
+    public function url_used_for_cas_client_changes_depending_on_whether_we_are_using_a_live_environment()
+    {
+
+        $bridge = $this->mock(PhpCASBridge::class);
+        $bridge->shouldReceive('setClient')->once()->withSomeOfArgs("www.owa-secure.com");
+
+        $provider = new OneKeyProvider($bridge,['live'=>true]);
+
+    }
 }
