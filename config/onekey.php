@@ -12,5 +12,6 @@ return [
      |
      */
     'debug' => env('ONE_KEY_DEBUG',false),
+    'live' => env('ONE_KEY_LIVE',true),
 
 ];

@@ -7,9 +7,9 @@ use Psr\Log\LoggerInterface;
 
 class OneKeyProvider
 {
+
     private PhpCASBridge $phpCASBridge;
 
-    private const SERVER_HOSTNAME = 'www.rowa-secure.com';
     private const SERVER_PORT = 443;
     private const SERVER_URI = 'sso';
 
@@ -27,12 +27,12 @@ class OneKeyProvider
         $this->config = $this->parseConfig($config);
 
         $this->phpCASBridge->setClient(
-          "S1",
-          self::SERVER_HOSTNAME,
-          self::SERVER_PORT,
-          self::SERVER_URI,
-          false,
-          new NullSessionHandler() // We don't want to a use a session at all because we are managing our own sessions
+            "S1",
+            $this->getHostName(),
+            self::SERVER_PORT,
+            self::SERVER_URI,
+            false,
+            new NullSessionHandler() // We don't want to a use a session at all because we are managing our own sessions
         );
 
         if ($this->config['debug']) {
@@ -46,14 +46,14 @@ class OneKeyProvider
 
         $this->phpCASBridge->setNoCasServerValidation()
 
-          // This prevents redirecting after successful authentication back to the callback url
-          // We are already handling the redirect after successful authentication, and it also means that we don't need
-          // to store the user in a php session
-          ->setNoClearTicketsFromUrl()
+            // This prevents redirecting after successful authentication back to the callback url
+            // We are already handling the redirect after successful authentication, and it also means that we don't need
+            // to store the user in a php session
+            ->setNoClearTicketsFromUrl()
 
-          // This wll redirect the user to onekey when there is no ticket in the url and otherwise retrieve the user
-          // from the ticket if it is valid
-          ->forceAuthentication();
+            // This wll redirect the user to onekey when there is no ticket in the url and otherwise retrieve the user
+            // from the ticket if it is valid
+            ->forceAuthentication();
 
         return new OneKeyUser($this->phpCASBridge->getAttributes());
     }
@@ -61,9 +61,12 @@ class OneKeyProvider
     private function parseConfig(array $config): array
     {
         return array_merge([
-          'debug' => false,
-          'callback_url' => ''
+            'debug' => false,
         ], $config);
     }
 
+    private function getHostName(): string
+    {
+        return config('live') ? 'www.owa-secure.com' : 'www.rowa-secure.com';
+    }
 }
