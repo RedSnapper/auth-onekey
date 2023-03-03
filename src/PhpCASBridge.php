@@ -9,26 +9,29 @@ class PhpCASBridge
 {
 
     public function setClient(
-      string $server_version,
-      string $server_hostname,
-      int $server_port,
-      string $server_uri,
-      bool $changeSessionID = true,
-      \SessionHandlerInterface $sessionHandler = null
+        string $server_version,
+        string $server_hostname,
+        int $server_port,
+        string $server_uri,
+        string $service_base_url,
+        bool $changeSessionID = true,
+        \SessionHandlerInterface $sessionHandler = null
     ): void {
         phpCAS::client(
-          $server_version,
-          $server_hostname,
-          $server_port,
-          $server_uri,
-          $changeSessionID,
-          $sessionHandler
+            $server_version,
+            $server_hostname,
+            $server_port,
+            $server_uri,
+            $service_base_url,
+            $changeSessionID,
+            $sessionHandler
         );
     }
 
     public function setVerbose()
     {
         phpCAS::setVerbose(true);
+
         return $this;
     }
 
@@ -40,6 +43,7 @@ class PhpCASBridge
     public function setLogger(LoggerInterface $logger)
     {
         phpCAS::setLogger($logger);
+
         return $this;
     }
 
@@ -48,15 +52,17 @@ class PhpCASBridge
         return phpCAS::getAttributes();
     }
 
-    public function setNoClearTicketsFromUrl():self
+    public function setNoClearTicketsFromUrl(): self
     {
         phpCAS::setNoClearTicketsFromUrl();
+
         return $this;
     }
 
-    public function setNoCasServerValidation():self
+    public function setNoCasServerValidation(): self
     {
         phpCAS::setNoCasServerValidation();
+
         return $this;
     }
 }

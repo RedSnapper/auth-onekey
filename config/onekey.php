@@ -11,7 +11,8 @@ return [
      | values for the CAS client.
      |
      */
-    'debug' => env('ONE_KEY_DEBUG',false),
-    'live' => env('ONE_KEY_LIVE',true),
+    'debug'            => env('ONE_KEY_DEBUG', false),
+    'live'             => env('ONE_KEY_LIVE', true),
+    'service-base-url' => env('ONE_KEY_SERVICE_BASE_URL'),
 
 ];
