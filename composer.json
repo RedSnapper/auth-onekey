@@ -26,15 +26,15 @@
 		}
 	},
 	"require": {
-		"php": "^7.4|^8.0",
+		"php": "^8.0",
 		"ext-json": "*",
 		"apereo/phpcas": "~1.6.0"
 	},
 	"require-dev": {
-		"orchestra/testbench": "^6.0",
-		"phpunit/phpunit": "^9.5",
-		"psalm/plugin-laravel": "^1.5",
-		"vimeo/psalm": "^4.9",
+		"orchestra/testbench": "^8.0",
+		"phpunit/phpunit": "^10.0",
+		"psalm/plugin-laravel": "^2.0",
+		"vimeo/psalm": "^5.0",
 		"guzzlehttp/guzzle": "^7.3"
 	},
     "scripts": {
