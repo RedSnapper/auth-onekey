@@ -54,6 +54,15 @@ class OneKeyUser
         return Arr::get($this->data, 'profession');
     }
 
+    public function getSpecialties(): array
+    {
+        return collect([
+            Arr::get($this->data, 'specialite1'),
+            Arr::get($this->data, 'specialite2'),
+            Arr::get($this->data, 'specialite3'),
+        ])->filter()->values()->toArray();
+    }
+
     public function isHCP(): bool
     {
         return Arr::get($this->data, 'usertype') === "PS";
