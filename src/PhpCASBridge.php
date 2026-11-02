@@ -15,7 +15,7 @@ class PhpCASBridge
         string $server_uri,
         string $service_base_url,
         bool $changeSessionID = true,
-        \SessionHandlerInterface $sessionHandler = null
+        ?\SessionHandlerInterface $sessionHandler = null
     ): void {
         phpCAS::client(
             $server_version,
