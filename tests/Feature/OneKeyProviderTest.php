@@ -3,6 +3,7 @@
 namespace RedSnapper\OneKey\Tests\Feature;
 
 use Mockery\MockInterface;
+use PHPUnit\Framework\Attributes\Test;
 use RedSnapper\OneKey\Exception\MissingServiceBaseUrlException;
 use RedSnapper\OneKey\OneKeyProvider;
 use RedSnapper\OneKey\PhpCASBridge;
@@ -10,7 +11,7 @@ use RedSnapper\OneKey\Tests\TestCase;
 
 class OneKeyProviderTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_retrieve_a_user_from_one_key()
     {
         $bridge = $this->mock(PhpCASBridge::class);
@@ -49,7 +50,7 @@ class OneKeyProviderTest extends TestCase
         $this->assertEquals($rawData, $user->getRaw());
     }
 
-    /** @test */
+    #[Test]
     public function url_used_for_cas_client_changes_depending_on_whether_we_are_using_a_test_environment()
     {
         $bridge = $this->mock(PhpCASBridge::class);
@@ -58,7 +59,7 @@ class OneKeyProviderTest extends TestCase
         $provider = new OneKeyProvider($bridge, ['live' => false, 'service-base-url' => 'https://test.com']);
     }
 
-    /** @test */
+    #[Test]
     public function url_used_for_cas_client_changes_depending_on_whether_we_are_using_a_live_environment()
     {
         $bridge = $this->mock(PhpCASBridge::class);
@@ -67,7 +68,7 @@ class OneKeyProviderTest extends TestCase
         $provider = new OneKeyProvider($bridge, ['live' => true, 'service-base-url' => 'https://test.com']);
     }
 
-    /** @test */
+    #[Test]
     public function service_base_url_defaults_base_request_url_if_not_provided_in_config()
     {
         $bridge = $this->mock(PhpCASBridge::class);
@@ -82,7 +83,7 @@ class OneKeyProviderTest extends TestCase
         $provider = new OneKeyProvider($bridge);
     }
 
-    /** @test */
+    #[Test]
     public function service_base_url_is_retrieved_from_config_if_set()
     {
         $bridge = $this->mock(PhpCASBridge::class);
@@ -92,7 +93,7 @@ class OneKeyProviderTest extends TestCase
         $provider = new OneKeyProvider($bridge, ['service-base-url' => 'https://abc.com']);
     }
 
-    /** @test */
+    #[Test]
     public function exception_is_thrown_if_service_base_url_not_provided_and_default_cannot_be_resolved()
     {
         $this->expectException(MissingServiceBaseUrlException::class);

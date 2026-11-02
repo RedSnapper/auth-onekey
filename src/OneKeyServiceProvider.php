@@ -27,7 +27,7 @@ class OneKeyServiceProvider extends ServiceProvider
           __DIR__.'/../config/onekey.php', 'onekey'
         );
 
-        $this->app->singleton(OneKeyProvider::class, function ($app) {
+        $this->app->singleton(OneKeyProvider::class, function () {
             return new OneKeyProvider(new PhpCASBridge,config('onekey'));
         });
     }

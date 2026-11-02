@@ -31,10 +31,10 @@
 		"apereo/phpcas": "~1.6.0"
 	},
 	"require-dev": {
-		"orchestra/testbench": "^8.0",
-		"phpunit/phpunit": "^10.0",
-		"psalm/plugin-laravel": "^2.0",
-		"vimeo/psalm": "^5.0",
+		"orchestra/testbench": "^10.0",
+		"phpunit/phpunit": "^11.5",
+		"psalm/plugin-laravel": "^3.0",
+		"vimeo/psalm": "^6.0",
 		"guzzlehttp/guzzle": "^7.3"
 	},
     "scripts": {
